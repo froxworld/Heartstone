@@ -24,8 +24,6 @@ public class ExtractionDonnee {
 
 
     public ArrayList<SequenceDeDonnee> extractionDeDonnee() {
-
-
         return new ArrayList<SequenceDeDonnee>();
     }
 }

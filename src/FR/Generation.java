@@ -21,9 +21,10 @@ public class Generation {
 
         Path sortieChemin = FileSystems.getDefault().getPath("sortie.txt");
         Path entreeChemin = FileSystems.getDefault().getPath("entree.txt");
-        System.out.println("generation" + sortieChemin);
+        System.out.println(sortieChemin);
         String spmf = "java -jar Ressources" + File.separator + "spmf.jar run " + nomDataMining + " "+ entreeChemin.toString() + " " + sortieChemin.toString() + " " + pourcentage + "%";
-        System.out.println("commande:"+ spmf);
+        System.out.println("sortie:"+ Files.exists(sortieChemin));
+        System.out.print(spmf);
         if (Files.exists(sortieChemin)) {
             System.out.println("voulez vous suprimer l'ancien fichier de sortie ?  O/N");
             Scanner scanner = new Scanner(System.in);
@@ -43,8 +44,8 @@ public class Generation {
                     e1.printStackTrace();
                 }
             } else {
-                System.out.println("faire une copie de l'ancien ");
-                //TODO faire une duplication de l ancien fichier avant de l effacer
+                System.out.println("Faire une copie de l'ancien ");
+
             }
         }else
         {

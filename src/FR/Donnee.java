@@ -23,19 +23,24 @@ public class Donnee {
 
         StringBuffer tampon = new StringBuffer();
         String[] lignes = chaine.split("\n");
+
         for (String ligne : lignes) {
             String[] debutLigne = ligne.split("#SUP:");
+
+            //int taille = debutLigne.length;
+            String nombreElement = debutLigne[debutLigne.length-1];
+
             String[] listeDesCartes = debutLigne[0].split(" ");
             if (listeDesCartes.length>1){
-                tampon.append("les cartes :");
+               tampon.append("les cartes : ");
                 for(int i=0; i<listeDesCartes.length; i++){
                     int nombre = Integer.parseInt(listeDesCartes[i]);
-                    MainTest.af(nombre);
+                    //MainTest.af(nombre);
                     String nomDeLaCarte = baseDonneeCarte.rendNomCarte(nombre);
-                    MainTest.af(nomDeLaCarte);
-                    tampon.append(nomDeLaCarte + " (N° "+ nombre + ") et ");
+                    //MainTest.af(nomDeLaCarte);
+                    tampon.append(nomDeLaCarte + " (N° "+ nombre + "), ");
                     }
-                    tampon.append(" sont en nombre de \n");
+                    tampon.append("sont en nombre de"+ nombreElement + " exemplaires");
             }
             else{
                 int nombre = Integer.parseInt(debutLigne[1].substring(1));
@@ -48,7 +53,7 @@ public class Donnee {
                         } else {
                             tampon.append(" | ");
                         }
-                        tampon.append(  nombre + " exemplaires\n");
+                        tampon.append(  nombre + " exemplaires");
                     }
                 }
             }
@@ -59,23 +64,18 @@ public class Donnee {
 
 
 
-
-
     public void extracteDonnee(BaseDonneeCarte baseDonneeCarte) throws IOException {
 
         HashMap<String, ArrayList<Integer>> carte = new HashMap<>();
-        URL url = getClass().getClassLoader().getResource("data/"+this.nomDuFichierEntree);
-        //MainTest.af(url.getPath());
-
+        URL url = getClass().getResource("/"+this.nomDuFichierEntree);
+        //MainTest.af(url.toString());
         File file1 = new File(url.getPath());
         Scanner scanner;
         MainTest.af("----------------------extraction -------------------------");
         try {
             scanner = new Scanner(file1);
-
             while (scanner.hasNext()) {
                 String ligne = scanner.nextLine();
-
                 MainTest.af(transforme(ligne, 0, baseDonneeCarte));
             }
         } catch (FileNotFoundException e) {
@@ -83,27 +83,3 @@ public class Donnee {
         }
     }
 }
-
-
-/*
-StringBuffer buffer = new StringBuffer();
-		String[] lines = out.split("\n");
-		for(String s1: lines) {
-			String[] line = s1.split("#SUP:");
-			String[] items = line[0].split(" ");
-			int support = Integer.parseInt(line[1].substring(1));
-			if(items.length-1 >= minSize) {
-				for(String s2: items) {
-					int tmpId = Integer.parseInt(s2);
-					if(tmpId != -1) {
-						String cardName = this.getCardById(tmpId);
-						buffer.append(cardName + " ");
-					} else {
-						buffer.append(" | ");
-					}
-				}
-				buffer.append(" || SUPPORT : " + support + "\n");
-			}
-		}
-		return buffer.toString();
- */
